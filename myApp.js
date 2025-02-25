@@ -71,10 +71,9 @@ const findEditThenSave = (personId, done) => {
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
   Person.findOneAndUpdate({name: personName}, {$set: {age: ageToSet}}, {new: true}, (err, updatedPerson) => {
-    if(err) return console.error(err)
-    if (!updatedPerson) return done(new Error("Person not found"), null);
+    if(err) return done(err, updatedPerson)
     console.log(`${updatedPerson.name} age's updated to ${updatedPerson.age}`)
-    done(null ,updatedPerson);
+    done(null , updatedPerson);
   })
 };
 
